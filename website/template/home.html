@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>{% block title %} ClimaTempo {% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% with menssagens = get_flashed_messages(with_categories=true) %}
+        {% if menssagens %}
+            {% for type,msg in menssagens %}
+                <div class="message">
+                    {% if type == 'error' %}
+                    <h1 style="color:Red">{{msg}}</h1>    
+                    {% else %}
+                    <h1 style="color:rgb(1, 255, 1)">{{msg}}</h1>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% block content %} 
+        <h1 id="title">Coloque o nome da sua cidade</h1>
+        <form method="post">
+            <input type="text" placeholder="Cidade" name="cidade" id="cidade"><br>
+            <input type="submit" value="Pesquisar Clima" id="button">
+        </form>
+    {% endblock %}
+</body>
+<hr id="footer_hr">
+<footer>
+    <h3><a href="https://home.openweathermap.org/" target="_blank">Wheater API</a></h3>
+    <h3><a href="https://rapidapi.com/lebedev.str/api/just-translated/" target="_blank">Translate API</a></h3>
+    <h3><abbr title="Rafael Simião de Sales Murakami">Autor</abbr></h3>
+    <h3><a href='mailto:rafasdsm@gmail.com'>Email de contato</a></h3>
+</footer>
+</html>
